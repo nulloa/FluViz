@@ -1,8 +1,6 @@
 source('delphi_epidata.R')
-res <- Epidata$fluview(list('nat'), list(200040,200041))
+res <- Epidata$fluview(list('nat'), list(200040))
 cat(paste(res$result, res$message, length(res$epidata), "\n"))
-res$epidata
-
 res <- as.data.frame(matrix(unlist(res$epidata), ncol=14, byrow=TRUE))
 colnames(res) <- c("release_date","region","issue","epiweek",
                    "lag","num_ili","num_patients","num_providers",
@@ -10,4 +8,7 @@ colnames(res) <- c("release_date","region","issue","epiweek",
                    "wili","ili")
 res
 
-get_flu_data("national", c("ilinet"), years=2000)
+
+require(cdcfluview)
+require(dplyr)
+get_flu_data("national", c("ilinet"), years=2000) %>% filter(WEEK==40)

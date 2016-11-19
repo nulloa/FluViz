@@ -9,11 +9,13 @@ dat$location <- factor(dat$location,
                                   "HHS Region 10","US National"))
 
 
+pdf("plots.pdf",width=12, height=12)
+
+
 # Grid of plots for a specific region
 region <- levels(dat$location)
 
 for(i in 1:length(region)){
-  png(paste("Plots/", region[i], ".png", sep=""),  width=1200, height=900)
   p1wk  <- ggplot(data=subset(dat, location==region[i] & as.numeric(as.character(bin_start_incl)) < 3 & target=="1 wk ahead"), 
                   aes(x=bin_start_incl, y=value)) + geom_point() + labs(title = "1 Week Ahead", x="ILI%", y="Prob")
   p2wk  <- ggplot(data=subset(dat, location==region[i] & as.numeric(as.character(bin_start_incl)) < 3 & target=="2 wk ahead"), 
@@ -32,8 +34,7 @@ for(i in 1:length(region)){
   pkwkdat$bin_start_incl <- factor(pkwkdat$bin_start_incl, levels=paste(c(40:52,1:20)))
   pkwk  <- ggplot(data=pkwkdat, aes(x=bin_start_incl, y=value)) + 
     geom_point() + ylim(0, 1) + labs(title = "Season Peak Week", x="Week", y="Prob")
-  grid.arrange(p1wk,onst,p2wk,pkper,p3wk,pkwk,p4wk, nrow=4, ncol=2)
-  dev.off()
+  grid.arrange(p1wk,onst,p2wk,pkper,p3wk,pkwk,p4wk, nrow=4, ncol=2, top=paste(region[i]))
 }
 
 
@@ -48,11 +49,10 @@ for(i in 1:length(region)){
 
 
 # Plots the probabilities of %ILI by region colored by week
-png("Plots/ILI_Region.png",  width=1200, height=900)
 sbdat <- subset(dat, as.numeric(as.character(bin_start_incl)) < 4 & 
                   target %in% c("1 wk ahead","2 wk ahead","3 wk ahead","4 wk ahead"))
 ggplot(data=sbdat, aes(x=as.numeric(as.character(bin_start_incl)), y=value, color=target)) + 
-  geom_point(size = 1) + facet_grid(location~.) + labs(x="ILI%", y="Prob")
+  geom_point(size = 1) + facet_grid(location~.) + labs(x="ILI%", y="Prob", title="ILI by Region")
 dev.off()
 
 

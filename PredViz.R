@@ -18,8 +18,7 @@ pdf("PredPlots/week45.pdf",width=18, height=12)
 
 for(i in 1:length(region)){
   p1wk  <- ggplot(data=subset(dat, location==region[i] & as.numeric(as.character(bin_start_incl)) <= wk & target=="1 wk ahead"), 
-                  aes(x=as.numeric(as.character(bin_start_incl)), y=value)) + geom_point() + labs(title = "1 Week Ahead", x="ILI%", y="Prob") +
-                  scale_x_continuous(breaks = round(seq(0, wk, by = 0.25),1))
+                  aes(x=as.numeric(as.character(bin_start_incl)), y=value)) + geom_point() + labs(title = "1 Week Ahead", x="ILI%", y="Prob")
   p2wk  <- ggplot(data=subset(dat, location==region[i] & as.numeric(as.character(bin_start_incl)) <= wk & target=="2 wk ahead"), 
                   aes(x=as.numeric(as.character(bin_start_incl)), y=value)) + geom_point() + labs(title = "2 Week Ahead", x="ILI%", y="Prob")
   p3wk  <- ggplot(data=subset(dat, location==region[i] & as.numeric(as.character(bin_start_incl)) <= wk & target=="3 wk ahead"), 

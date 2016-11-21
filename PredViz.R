@@ -13,18 +13,19 @@ wk <- 5
 
 
 
-pdf("plots.pdf",width=18, height=12)
+pdf("PredPlots/week45.pdf",width=18, height=12)
 # Grid of plots for a specific region
 
 for(i in 1:length(region)){
   p1wk  <- ggplot(data=subset(dat, location==region[i] & as.numeric(as.character(bin_start_incl)) <= wk & target=="1 wk ahead"), 
-                  aes(x=bin_start_incl, y=value)) + geom_point() + labs(title = "1 Week Ahead", x="ILI%", y="Prob")
+                  aes(x=as.numeric(as.character(bin_start_incl)), y=value)) + geom_point() + labs(title = "1 Week Ahead", x="ILI%", y="Prob") +
+                  scale_x_continuous(breaks = round(seq(0, wk, by = 0.25),1))
   p2wk  <- ggplot(data=subset(dat, location==region[i] & as.numeric(as.character(bin_start_incl)) <= wk & target=="2 wk ahead"), 
-                  aes(x=bin_start_incl, y=value)) + geom_point() + labs(title = "2 Week Ahead", x="ILI%", y="Prob")
+                  aes(x=as.numeric(as.character(bin_start_incl)), y=value)) + geom_point() + labs(title = "2 Week Ahead", x="ILI%", y="Prob")
   p3wk  <- ggplot(data=subset(dat, location==region[i] & as.numeric(as.character(bin_start_incl)) <= wk & target=="3 wk ahead"), 
-                  aes(x=bin_start_incl, y=value)) + geom_point() + labs(title = "3 Week Ahead", x="ILI%", y="Prob")
+                  aes(x=as.numeric(as.character(bin_start_incl)), y=value)) + geom_point() + labs(title = "3 Week Ahead", x="ILI%", y="Prob")
   p4wk  <- ggplot(data=subset(dat, location==region[i] & as.numeric(as.character(bin_start_incl)) <= wk & target=="4 wk ahead"), 
-                  aes(x=bin_start_incl, y=value)) + geom_point() + labs(title = "4 Week Ahead", x="ILI%", y="Prob")
+                  aes(x=as.numeric(as.character(bin_start_incl)), y=value)) + geom_point() + labs(title = "4 Week Ahead", x="ILI%", y="Prob")
   onstdat <- subset(dat, location==region[i] & target=="Season onset")
   onstdat$bin_start_incl <- factor(onstdat$bin_start_incl, levels=paste(c(40:52,1:20)))
   onst  <- ggplot(data=onstdat, aes(x=bin_start_incl, y=value)) + 

@@ -2,28 +2,28 @@ library(ggplot2)
 library(gridExtra)
 
 #dat <- read.csv("EW44-ISU-2016-11-14.csv", header=TRUE)
-dat <- read.csv("https://raw.githubusercontent.com/NLMichaud/hierarchicalSIRMods/master/currentSeasonPredictions/submittedCSVs/EW43-ISU-2016-11-07.csv?token=AFk8HZWP_L5HeKKUF7S0jDnIPXBIpHWiks5YOf6qwA%3D%3D", header=TRUE)
+dat <- read.csv("https://raw.githubusercontent.com/NLMichaud/hierarchicalSIRMods/master/currentSeasonPredictions/submittedCSVs/EW45-ISU-2016-11-20.csv?token=AFk8HUpHzce7VXJdOtVMWpZ5J-U0pYyRks5YO5JCwA%3D%3D", header=TRUE)
 dat$location <- factor(dat$location,
                          levels=c("HHS Region 1","HHS Region 2","HHS Region 3",
                                   "HHS Region 4","HHS Region 5","HHS Region 6",
                                   "HHS Region 7","HHS Region 8","HHS Region 9",
                                   "HHS Region 10","US National"))
-
-
-pdf("plots.pdf",width=12, height=12)
-
-
-# Grid of plots for a specific region
 region <- levels(dat$location)
+wk <- 5
+
+
+
+pdf("plots.pdf",width=18, height=12)
+# Grid of plots for a specific region
 
 for(i in 1:length(region)){
-  p1wk  <- ggplot(data=subset(dat, location==region[i] & as.numeric(as.character(bin_start_incl)) < 3 & target=="1 wk ahead"), 
+  p1wk  <- ggplot(data=subset(dat, location==region[i] & as.numeric(as.character(bin_start_incl)) <= wk & target=="1 wk ahead"), 
                   aes(x=bin_start_incl, y=value)) + geom_point() + labs(title = "1 Week Ahead", x="ILI%", y="Prob")
-  p2wk  <- ggplot(data=subset(dat, location==region[i] & as.numeric(as.character(bin_start_incl)) < 3 & target=="2 wk ahead"), 
+  p2wk  <- ggplot(data=subset(dat, location==region[i] & as.numeric(as.character(bin_start_incl)) <= wk & target=="2 wk ahead"), 
                   aes(x=bin_start_incl, y=value)) + geom_point() + labs(title = "2 Week Ahead", x="ILI%", y="Prob")
-  p3wk  <- ggplot(data=subset(dat, location==region[i] & as.numeric(as.character(bin_start_incl)) < 3 & target=="3 wk ahead"), 
+  p3wk  <- ggplot(data=subset(dat, location==region[i] & as.numeric(as.character(bin_start_incl)) <= wk & target=="3 wk ahead"), 
                   aes(x=bin_start_incl, y=value)) + geom_point() + labs(title = "3 Week Ahead", x="ILI%", y="Prob")
-  p4wk  <- ggplot(data=subset(dat, location==region[i] & as.numeric(as.character(bin_start_incl)) < 3 & target=="4 wk ahead"), 
+  p4wk  <- ggplot(data=subset(dat, location==region[i] & as.numeric(as.character(bin_start_incl)) <= wk & target=="4 wk ahead"), 
                   aes(x=bin_start_incl, y=value)) + geom_point() + labs(title = "4 Week Ahead", x="ILI%", y="Prob")
   onstdat <- subset(dat, location==region[i] & target=="Season onset")
   onstdat$bin_start_incl <- factor(onstdat$bin_start_incl, levels=paste(c(40:52,1:20)))
@@ -50,7 +50,7 @@ for(i in 1:length(region)){
 
 
 # Plots the probabilities of %ILI by region colored by week
-sbdat <- subset(dat, as.numeric(as.character(bin_start_incl)) < 4 & 
+sbdat <- subset(dat, as.numeric(as.character(bin_start_incl)) <= wk & 
                   target %in% c("1 wk ahead","2 wk ahead","3 wk ahead","4 wk ahead"))
 ggplot(data=sbdat, aes(x=as.numeric(as.character(bin_start_incl)), y=value, color=target)) + 
   geom_point(size = 1) + facet_grid(location~.) + labs(x="ILI%", y="Prob", title="ILI by Region")

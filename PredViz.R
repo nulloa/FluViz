@@ -2,18 +2,18 @@ library(ggplot2)
 library(gridExtra)
 
 #dat <- read.csv("EW44-ISU-2016-11-14.csv", header=TRUE)
-dat <- read.csv("https://raw.githubusercontent.com/NLMichaud/hierarchicalSIRMods/master/currentSeasonPredictions/submittedCSVs/EW45-ISU-2016-11-20.csv?token=AFk8HUpHzce7VXJdOtVMWpZ5J-U0pYyRks5YO5JCwA%3D%3D", header=TRUE)
+dat <- read.csv("https://raw.githubusercontent.com/NLMichaud/hierarchicalSIRMods/master/currentSeasonPredictions/submittedCSVs/EW46-ISU-2016-11-27.csv?token=AFk8HRP8OkWvp0f3IYsY8Y3W3R5JAtaxks5YRLRWwA%3D%3D", header=TRUE)
 dat$location <- factor(dat$location,
                          levels=c("HHS Region 1","HHS Region 2","HHS Region 3",
                                   "HHS Region 4","HHS Region 5","HHS Region 6",
                                   "HHS Region 7","HHS Region 8","HHS Region 9",
                                   "HHS Region 10","US National"))
 region <- levels(dat$location)
-wk <- 5
+wk <- 4.5
 
 
 
-pdf("PredPlots/week45.pdf",width=18, height=12)
+pdf("PredPlots/week46.pdf",width=18, height=12)
 # Grid of plots for a specific region
 
 for(i in 1:length(region)){

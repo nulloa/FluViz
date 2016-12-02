@@ -1,8 +1,11 @@
 plotgrid <- function(dat, wk, ilimax, normal=FALSE){
-  
-  pdf(paste("PredPlots/week", wk, ".pdf", sep=""), width=18, height=12)
+
   region <- levels(dat$location)
-  
+  sbdat <- subset(dat, as.numeric(as.character(bin_start_incl)) <= ilimax & 
+                    target %in% c("1 wk ahead","2 wk ahead","3 wk ahead","4 wk ahead"))
+    
+  pdf(paste("PredPlots/week", wk, ".pdf", sep=""), width=18, height=12)
+
   for(i in 1:length(region)){
     p1wk  <- ggplot(data=subset(dat, location==region[i] & as.numeric(as.character(bin_start_incl)) <= ilimax & target=="1 wk ahead"), 
                     aes(x=as.numeric(as.character(bin_start_incl)), y=value)) + geom_point() + labs(title = "1 Week Ahead", x="ILI%", y="Prob")
@@ -43,10 +46,10 @@ plotgrid <- function(dat, wk, ilimax, normal=FALSE){
   
   
   # Plots the probabilities of %ILI by region colored by week
-  sbdat <- subset(dat, as.numeric(as.character(bin_start_incl)) <= ilimax & 
-                    target %in% c("1 wk ahead","2 wk ahead","3 wk ahead","4 wk ahead"))
-  ggplot(data=sbdat, aes(x=as.numeric(as.character(bin_start_incl)), y=value, color=target)) + 
+  natplot <- ggplot(data=sbdat, aes(x=as.numeric(as.character(bin_start_incl)), y=value, color=target)) +
     geom_point(size = 1) + facet_grid(location~.) + labs(x="ILI%", y="Prob", title="ILI by Region")
+  print(natplot)
+  
   dev.off()
   
 }

@@ -1,5 +1,9 @@
 plotgrid <- function(dat, wk, ilimax, normal=FALSE){
-
+  
+  require(ggplot2)
+  require(gridExtra)
+  require(cdcfluview)
+  
   region <- levels(dat$location)
   sbdat <- subset(dat, as.numeric(as.character(bin_start_incl)) <= ilimax & 
                     target %in% c("1 wk ahead","2 wk ahead","3 wk ahead","4 wk ahead"))

@@ -1,5 +1,6 @@
 library(ggplot2)
 library(gridExtra)
+library(cdcfluview)
 
 #dat <- read.csv("EW44-ISU-2016-11-14.csv", header=TRUE)
 dat <- read.csv("https://raw.githubusercontent.com/NLMichaud/hierarchicalSIRMods/master/currentSeasonPredictions/submittedCSVs/EW46-ISU-2016-11-27.csv?token=AFk8HRP8OkWvp0f3IYsY8Y3W3R5JAtaxks5YRLRWwA%3D%3D", header=TRUE)
@@ -16,3 +17,7 @@ source("plotgrid.R")
 plotgrid(dat, wk=46, ilimax=4.5, normal=TRUE)
 
 
+
+
+hey <- get_flu_data("national", NA, "ilinet")
+hi  <- get_flu_data("hhs", 1:10, "ilinet")

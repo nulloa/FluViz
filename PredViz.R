@@ -1,9 +1,12 @@
 library(ggplot2)
 library(gridExtra)
+library(httr)
+library(pbapply)
 library(cdcfluview)
+source("get_flu_data_update.R")
 
 #dat <- read.csv("EW44-ISU-2016-11-14.csv", header=TRUE)
-dat <- read.csv("https://raw.githubusercontent.com/NLMichaud/hierarchicalSIRMods/master/currentSeasonPredictions/submittedCSVs/EW46-ISU-2016-11-27.csv?token=AFk8HRP8OkWvp0f3IYsY8Y3W3R5JAtaxks5YRLRWwA%3D%3D", header=TRUE)
+dat <- read.csv("https://raw.githubusercontent.com/NLMichaud/hierarchicalSIRMods/master/currentSeasonPredictions/submittedCSVs/EW47-ISU-2016-12-05.csv?token=AFk8HZjYB9bB1BwTbqLfzIC3rsRYHeyGks5YTtJ2wA%3D%3D", header=TRUE)
 dat$location <- factor(dat$location,
                          levels=c("HHS Region 1","HHS Region 2","HHS Region 3",
                                   "HHS Region 4","HHS Region 5","HHS Region 6",
@@ -14,10 +17,5 @@ dat$location <- factor(dat$location,
 source("plotgrid.R")
 
 
-plotgrid(dat, wk=46, ilimax=4.5, normal=TRUE)
-
-
-
-
-hey <- get_flu_data("national", NA, "ilinet")
-hi  <- get_flu_data("hhs", 1:10, "ilinet")
+plotgrid(dat, wk="47Normalized", ilimax=4.5, normal=TRUE)
+plotgrid(dat, wk=47, ilimax=4.5, normal=FALSE)

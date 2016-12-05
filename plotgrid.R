@@ -8,7 +8,7 @@ plotgrid <- function(dat, wk, ilimax, normal=FALSE){
   NatFluDat <- get_flu_data("national", NA, "ilinet")
   RegFluDat <- get_flu_data("hhs", 1:10, "ilinet")
   
-  CurrentILIPer <- c(tail(as.numeric(RegFluDat$X..WEIGHTED.ILI)/100, n=10),tail(as.numeric(NatFluDat$X..WEIGHTED.ILI)/100, n=1))
+  CurrentILIPer <- c(tail(as.numeric(RegFluDat$X..WEIGHTED.ILI), n=10),tail(as.numeric(NatFluDat$X..WEIGHTED.ILI), n=1))
   
   region <- levels(dat$location)
   sbdat <- subset(dat, as.numeric(as.character(bin_start_incl)) <= ilimax & 
@@ -65,9 +65,8 @@ plotgrid <- function(dat, wk, ilimax, normal=FALSE){
   
   # Plots the probabilities of %ILI by region colored by week
   natplot <- ggplot(data=sbdat, aes(x=as.numeric(as.character(bin_start_incl)), y=value, color=target)) +
-    geom_point(size = 1) + facet_grid(location~.) + labs(x="ILI%", y="Prob", title="ILI by Region") +
-    geom_vline(xintercept = CurrentILIPer[11])
-  
+    geom_point(size = 1) + facet_grid(location~.) + labs(x="ILI%", y="Prob", title="ILI by Region")
+    
   print(natplot)
   
   dev.off()

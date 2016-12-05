@@ -1,4 +1,4 @@
-plotgrid <- function(dat, wk, ilimax, normal=FALSE){
+plotgrid <- function(dat, wk, ilimax){
   
   require(ggplot2)
   require(gridExtra)
@@ -37,16 +37,8 @@ plotgrid <- function(dat, wk, ilimax, normal=FALSE){
     # Plot Onset Week Predictions
     onstdat <- subset(dat, location==region[i] & target=="Season onset" & type=="Bin")
     onstdat$bin_start_incl <- factor(onstdat$bin_start_incl, levels=paste(c(40:52,1:20)))
-    
-    if(normal==TRUE){
-      onstdat$value[is.na(onstdat$bin_start_incl)] <- .1
-      onstdat$value[!is.na(onstdat$bin_start_incl)] <- onstdat$value[!is.na(onstdat$bin_start_incl)]/sum(onstdat$value[!is.na(onstdat$bin_start_incl)])
-      onst  <- ggplot(data=onstdat, aes(x=bin_start_incl, y=value)) + 
+    onst  <- ggplot(data=onstdat, aes(x=bin_start_incl, y=value)) + 
         geom_point() + labs(title = "Season Onset", x="Week", y="Prob")
-    }else{
-      onst  <- ggplot(data=onstdat, aes(x=bin_start_incl, y=value)) + 
-        geom_point() + labs(title = "Season Onset", x="Week", y="Prob")
-    }
     
     # Plot Peak Percentage Predictions
     pkper <- ggplot(data=subset(dat, location==region[i] & target=="Season peak percentage" & type=="Bin"), 

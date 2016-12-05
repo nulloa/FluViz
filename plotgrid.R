@@ -2,7 +2,7 @@ plotgrid <- function(dat, wk, ilimax, normal=FALSE){
   
   require(ggplot2)
   require(gridExtra)
-  require(cdcfluview)
+  #require(cdcfluview)
   
   region <- levels(dat$location)
   sbdat <- subset(dat, as.numeric(as.character(bin_start_incl)) <= ilimax & 

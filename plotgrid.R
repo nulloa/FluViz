@@ -3,12 +3,11 @@ plotgrid <- function(dat, wk, ilimax){
   require(ggplot2)
   require(gridExtra)
   require(cdcfluview)
-  source("get_flu_data_update.R")
   
   NatFluDat <- get_flu_data("national", NA, "ilinet")
   RegFluDat <- get_flu_data("hhs", 1:10, "ilinet")
   
-  CurrentILIPer <- c(tail(as.numeric(RegFluDat$X..WEIGHTED.ILI), n=10),tail(as.numeric(NatFluDat$X..WEIGHTED.ILI), n=1))
+  CurrentILIPer <- c(tail(as.numeric(RegFluDat$'% WEIGHTED ILI'), n=10),tail(as.numeric(NatFluDat$'% WEIGHTED ILI'), n=1))
   
   region <- levels(dat$location)
   sbdat <- subset(dat, as.numeric(as.character(bin_start_incl)) <= ilimax & 

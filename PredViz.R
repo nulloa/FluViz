@@ -15,5 +15,5 @@ dat$location <- factor(dat$location,
                                   "HHS Region 10","US National"))
 
 # Create Plots
-plotgrid(normalize_onset(dat), wk="48_Normalized", ilimax=4.5)
-plotgrid(dat, wk=48, ilimax=4.5)
+plotgrid(normalize_onset(dat), wk="48_Normalized", ilimax=6)
+plotgrid(dat, wk=48, ilimax=6)

@@ -9,7 +9,7 @@ plotgrid <- function(dat, wk, ilimax){
   
   CurrentILIPer <- c(tail(as.numeric(RegFluDat$'% WEIGHTED ILI'), n=10),tail(as.numeric(NatFluDat$'% WEIGHTED ILI'), n=1))
   # ILI Baselines for Regions 1:10, National
-  ILIbaseline <- c(.014, .03, .022, .017, .019, .041, .018, .014, .025, .011, .022)*100
+  ILIbaseline <- read.csv("ILIBaselines.csv")
 
   region <- levels(dat$location)
   sbdat <- subset(dat, as.numeric(as.character(bin_start_incl)) <= ilimax & 
@@ -54,7 +54,7 @@ plotgrid <- function(dat, wk, ilimax){
     # Plot Actual % ILI up to current week
     truedat <- ggplot(data=NatFluDat,aes(x=WEEK, y=NatFluDat$'% WEIGHTED ILI')) + 
       geom_line()+geom_point()+ylab("Actual % ILI") + 
-      geom_hline(yintercept = ILIbaseline[i])
+      geom_hline(yintercept = ILIbaseline$Baselines[ILIbaseline$Region==region[i]])
     
     # Arranges various plots onto a grid
     grid.arrange(p1wk,onst,p2wk,pkper,p3wk,pkwk,p4wk,truedat, nrow=4, ncol=2, top=paste(region[i]))

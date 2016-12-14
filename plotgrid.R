@@ -8,7 +8,9 @@ plotgrid <- function(dat, wk, ilimax){
   RegFluDat <- get_flu_data("hhs", 1:10, "ilinet")
   
   CurrentILIPer <- c(tail(as.numeric(RegFluDat$'% WEIGHTED ILI'), n=10),tail(as.numeric(NatFluDat$'% WEIGHTED ILI'), n=1))
-  
+  # ILI Baselines for Regions 1:10, National
+  ILIbaseline <- c(.014, .03, .022, .017, .019, .041, .018, .014, .025, .011, .022)*100
+
   region <- levels(dat$location)
   sbdat <- subset(dat, as.numeric(as.character(bin_start_incl)) <= ilimax & 
                     target %in% c("1 wk ahead","2 wk ahead","3 wk ahead","4 wk ahead"))
@@ -49,8 +51,13 @@ plotgrid <- function(dat, wk, ilimax){
     pkwk  <- ggplot(data=pkwkdat, aes(x=bin_start_incl, y=value)) + 
       geom_point() + ylim(0, 1) + labs(title = "Season Peak Week", x="Week", y="Prob")
     
+    # Plot Actual % ILI up to current week
+    truedat <- ggplot(data=NatFluDat,aes(x=WEEK, y=NatFluDat$'% WEIGHTED ILI')) + 
+      geom_line()+geom_point()+ylab("Actual % ILI") + 
+      geom_hline(yintercept = ILIbaseline[i])
+    
     # Arranges various plots onto a grid
-    grid.arrange(p1wk,onst,p2wk,pkper,p3wk,pkwk,p4wk, nrow=4, ncol=2, top=paste(region[i]))
+    grid.arrange(p1wk,onst,p2wk,pkper,p3wk,pkwk,p4wk,truedat, nrow=4, ncol=2, top=paste(region[i]))
   }
   
   

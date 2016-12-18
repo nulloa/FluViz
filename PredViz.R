@@ -6,8 +6,9 @@ library(cdcfluview)
 source("normalize_onset.R") # Load in normalize fn
 source("plotgrid.R") # Load in plot fn
 
-#dat <- read.csv("EW44-ISU-2016-11-14.csv", header=TRUE)
-dat <- read.csv("https://raw.githubusercontent.com/NLMichaud/hierarchicalSIRMods/master/currentSeasonPredictions/submittedCSVs/EW48-ISU-2016-12-12.csv?token=AFk8HQV20wboes4cSdTxk_uYPyDAlClEks5YWJ60wA%3D%3D", header=TRUE)
+# Read in data
+url <- "https://raw.githubusercontent.com/NLMichaud/hierarchicalSIRMods/master/currentSeasonPredictions/submittedCSVs/EW48-ISU-2016-12-12.csv?token=AFk8HQV20wboes4cSdTxk_uYPyDAlClEks5YWJ60wA%3D%3D"
+dat <- read.csv(url, header=TRUE)
 dat$location <- factor(dat$location,
                          levels=c("HHS Region 1","HHS Region 2","HHS Region 3",
                                   "HHS Region 4","HHS Region 5","HHS Region 6",

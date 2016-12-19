@@ -6,6 +6,13 @@ plotgrid <- function(dat, wk, ilimax){
   
   NatFluDat <- get_flu_data("national", NA, "ilinet")
   RegFluDat <- get_flu_data("hhs", 1:10, "ilinet")
+  CFluDat <- rbind(NatFluDat,RegFluDat)
+  CFluDat$REGION[CFluDat$REGION=="X"] <- "National"
+  CFluDat$REGION <- as.factor(CFluDat$REGION)
+  levels(CFluDat$REGION) <- c("US National", "HHS Region 1","HHS Region 10",
+                              "HHS Region 2","HHS Region 3","HHS Region 4",
+                              "HHS Region 5","HHS Region 6","HHS Region 7",
+                              "HHS Region 8","HHS Region 9")
   
   CurrentILIPer <- c(tail(as.numeric(RegFluDat$'% WEIGHTED ILI'), n=10),tail(as.numeric(NatFluDat$'% WEIGHTED ILI'), n=1))
   # ILI Baselines for Regions 1:10, National
@@ -52,8 +59,9 @@ plotgrid <- function(dat, wk, ilimax){
       geom_point() + ylim(0, 1) + labs(title = "Season Peak Week", x="Week", y="Prob")
     
     # Plot Actual % ILI up to current week
-    truedat <- ggplot(data=NatFluDat,aes(x=WEEK, y=NatFluDat$'% WEIGHTED ILI')) + 
-      geom_line()+geom_point()+ylab("Actual % ILI") + 
+    csub <- subset(CFluDat,REGION==region[i])
+    truedat <- ggplot(data=csub,aes(x=WEEK, y=csub$'% WEIGHTED ILI')) + 
+      geom_line()+geom_point()+ylab("Actual % ILI") + scale_x_discrete() +
       geom_hline(yintercept = ILIbaseline$Baselines[ILIbaseline$Region==region[i]])
     
     # Arranges various plots onto a grid

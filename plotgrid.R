@@ -61,7 +61,7 @@ plotgrid <- function(dat, wk, ilimax){
     # Plot Actual % ILI up to current week
     csub <- subset(CFluDat,REGION==region[i])
     truedat <- ggplot(data=csub,aes(x=WEEK, y=csub$'% WEIGHTED ILI')) + 
-      geom_line()+geom_point()+ylab("Actual % ILI") + scale_x_discrete() +
+      geom_line()+geom_point()+ylab("Actual % ILI") + scale_x_continuous(breaks=csub$WEEK) +
       geom_hline(yintercept = ILIbaseline$Baselines[ILIbaseline$Region==region[i]])
     
     # Arranges various plots onto a grid

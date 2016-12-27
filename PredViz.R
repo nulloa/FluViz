@@ -7,7 +7,7 @@ source("normalize_onset.R") # Load in normalize fn
 source("plotgrid.R") # Load in plot fn
 
 # Read in data
-url <- "https://raw.githubusercontent.com/NLMichaud/hierarchicalSIRMods/master/currentSeasonPredictions/submittedCSVs/EW49-ISU-2016-12-18.csv?token=AFk8HdoUwEWxlm0gvYyw-oeQUZGMPXLYks5YYJFrwA%3D%3D"
+url <- "https://raw.githubusercontent.com/NLMichaud/hierarchicalSIRMods/master/currentSeasonPredictions/submittedCSVs/EW50-ISU-2016-12-26.csv?token=AFk8He0xOdnyVqdhjkqe8uqAm5y33Temks5YavlrwA%3D%3D"
 dat <- read.csv(url, header=TRUE)
 dat$location <- factor(dat$location,
                          levels=c("HHS Region 1","HHS Region 2","HHS Region 3",
@@ -16,5 +16,5 @@ dat$location <- factor(dat$location,
                                   "HHS Region 10","US National"))
 
 # Create Plots
-plotgrid(normalize_onset(dat, nalim=.001), wk="49_Normalized", ilimax=6)
-plotgrid(dat, wk=49, ilimax=6)
+plotgrid(normalize_onset(dat, nalim=.001), wk="50_Normalized", ilimax=6)
+plotgrid(dat, wk=50, ilimax=6)

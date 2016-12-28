@@ -46,7 +46,7 @@ plotgrid <- function(dat, wk, ilimax){
     onstdat <- subset(dat, location==region[i] & target=="Season onset" & type=="Bin")
     onstdat$bin_start_incl <- factor(as.factor(onstdat$bin_start_incl))
     onstdat$bin_start_incl <- factor(onstdat$bin_start_incl, levels=c(paste(c(40:52,1:20),".0",sep=""),"none"))
-    levels(pkwkdat$bin_start_incl) <- paste(c(40:52,1:20),"None")
+    levels(onstdat$bin_start_incl) <- c(paste(c(40:52,1:20)),"none")
     onst  <- ggplot(data=onstdat, aes(x=bin_start_incl, y=value)) + 
         geom_point() + labs(title = "Season Onset", x="Week", y="Prob")
     
@@ -55,7 +55,7 @@ plotgrid <- function(dat, wk, ilimax){
                     aes(x=as.numeric(as.character(bin_start_incl)), y=value)) + geom_point() + labs(title = "Season Peak Percentage", x="Percent", y="Prob")
     
     # Plot Peak Week Predictions
-    pkwkdat <- subset(dat, location==region[i] & target=="Season peak week")
+    pkwkdat <- subset(dat, location==region[i] & target=="Season peak week" & type=="Bin")
     pkwkdat$bin_start_incl <- factor(as.factor(pkwkdat$bin_start_incl))
     pkwkdat$bin_start_incl <- factor(pkwkdat$bin_start_incl, levels=c(paste(c(40:52,1:20),".0",sep="")))
     levels(pkwkdat$bin_start_incl) <- paste(c(40:52,1:20))

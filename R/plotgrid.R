@@ -1,4 +1,4 @@
-plotgrid <- function(dat, week, ilimax){
+plotgrid <- function(dat, week, ilimx){
   require(ggplot2)
   require(gridExtra)
   require(cdcfluview)
@@ -20,10 +20,10 @@ plotgrid <- function(dat, week, ilimax){
   for(i in 1:length(region)){
     
     # Plot ILI% predictions for Weeks out
-    p1wk <- plotWeekAhead(dat, region=region[i], wk=1)
-    p2wk <- plotWeekAhead(dat, region=region[i], wk=2)
-    p3wk <- plotWeekAhead(dat, region=region[i], wk=3)
-    p4wk <- plotWeekAhead(dat, region=region[i], wk=4)
+    p1wk <- plotWeekAhead(dat, region=region[i], wk=1, ilimax=ilimx)
+    p2wk <- plotWeekAhead(dat, region=region[i], wk=2, ilimax=ilimx)
+    p3wk <- plotWeekAhead(dat, region=region[i], wk=3, ilimax=ilimx)
+    p4wk <- plotWeekAhead(dat, region=region[i], wk=4, ilimax=ilimx)
     
     # Plot Onset Week Predictions
     onst  <- plotOnset(dat, region[i])
@@ -43,7 +43,7 @@ plotgrid <- function(dat, week, ilimax){
   
   
   # Plots the probabilities of %ILI by region colored by week
-  sbdat <- subset(dat, as.numeric(as.character(bin_start_incl)) <= ilimax & 
+  sbdat <- subset(dat, as.numeric(as.character(bin_start_incl)) <= ilimx & 
                     target %in% c("1 wk ahead","2 wk ahead","3 wk ahead","4 wk ahead"))
   
   natplot <- ggplot(data=sbdat, aes(x=as.numeric(as.character(bin_start_incl)), y=value, color=target)) +

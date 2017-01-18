@@ -10,8 +10,10 @@ plotcdcdata <- function(region){
 
   ILIbaseline <- read.csv("ILIBaselines.csv")
   
+  d$WEEK <- factor(factor(as.factor(d$WEEK)), levels=c(c(40:52,1:20),"none"))
+  
   ggplot(data=d, aes(x=WEEK, y=d$'% WEIGHTED ILI')) + 
-    geom_line() + geom_point() + ylab("Actual % ILI") + scale_x_continuous(breaks=d$WEEK) +
+    geom_line(aes(group=1)) + geom_point() + ylab("Actual % ILI") +
     geom_hline(yintercept = ILIbaseline$Baselines[ILIbaseline$Region==region])
   
   

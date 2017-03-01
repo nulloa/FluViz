@@ -50,6 +50,7 @@
 # }
 # dev.off()
 # 
+
 # targetdat <- create_truth(fluview = FALSE, weekILI = valid_ILI, year=yrs[1])
 # targetdat$Year <- rep(yrs[1], nrow(targetdat))
 # for(i in 2:length(yrs)){
@@ -63,7 +64,5 @@
 # onset <- ggplot(data=subset(targetdat, target=="Season onset"), aes(x=location,y=bin_start_incl,color=Year))+geom_point()
 # pkper <- ggplot(data=subset(targetdat, target=="Season peak percentage"), aes(x=location,y=bin_start_incl))
 # pkwk  <- ggplot(data=subset(targetdat, target=="Season peak week"), aes(x=location,y=bin_start_incl))
-
-
 
 

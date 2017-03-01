@@ -1,4 +1,14 @@
-normalize_onset <- function(data, nalim=0.1){
+#' A Normalizing Onset Function
+#'
+#' This function allows you to normalize the onset of a CDC fluview submission.
+#' @param data Expects a data csv in the form of a CDC fluview submission see FluSight package for a minimal submission
+#' @param nalim Sets the max probability assigned to no onset. Defaults to 0.001.
+#' @keywords Normalize Onset
+#' @export
+#' @examples
+#' normalize_onset()
+
+normalize_onset <- function(data, nalim=0.001){
   region <- levels(data$location)
   for(i in 1:length(region)){
     subreg <- subset(data, location==region[i] & target=="Season onset" & type=="Bin")

@@ -1,3 +1,15 @@
+#' A Week Ahead Plot Function
+#'
+#' This function allows you to plot Weak Ahead Predictions
+#' @param dat Expects a data csv in the form of a CDC fluview submission see \code{FluSight} package for a minimal submission
+#' @param region Specifies the region to be plotted
+#' @param wk Numeric. How many weeks ahead to plot. Defaults to 1.
+#' @param ilimax Numeric. Max level of ILI percentage to be plotted
+#' @keywords Week Ahead Prediction Plots
+#' @export
+#' @examples
+#' plotWeekAhead()
+
 plotWeekAhead <- function(dat, region, wk=1, ilimax){
   require(ggplot2)
   require(cdcfluview)

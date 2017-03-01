@@ -1,3 +1,14 @@
+#' A Peak Week Plot Function
+#'
+#' This function allows you to plot Peak Week Predictions
+#' @param dat Expects a data csv in the form of a CDC fluview submission see \code{FluSight} package for a minimal submission
+#' @param region Specifies the region to be plotted
+#' @keywords Peak Week Prediction Plot
+#' @export
+#' @examples
+#' plotPeakWeek()
+
+
 plotPeakWeek <- function(dat, region){
   require(ggplot2)
   

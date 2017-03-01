@@ -1,3 +1,13 @@
+#' A Onset Plot Function
+#'
+#' This function allows you to plot Onset Predictions
+#' @param dat Expects a data csv in the form of a CDC fluview submission see \code{FluSight} package for a minimal submission
+#' @param region Specifies the region to be plotted
+#' @keywords Onset Prediction Plot
+#' @export
+#' @examples
+#' plotOnset()
+
 plotOnset <- function(dat, region){
   require(ggplot2)
   

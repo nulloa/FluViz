@@ -1,3 +1,13 @@
+#' A Peak Percentage Plot Function
+#'
+#' This function allows you to plot Peak Percentage Predictions
+#' @param dat Expects a data csv in the form of a CDC fluview submission see \code{FluSight} package for a minimal submission
+#' @param region Specifies the region to be plotted
+#' @keywords Peak Percentage Prediction Plot
+#' @export
+#' @examples
+#' plotPeakPer()
+
 plotPeakPer <- function(dat, region){
   require(ggplot2)
   

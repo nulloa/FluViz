@@ -50,20 +50,20 @@ for(i in 1:length(region)){
 }
 dev.off()
 
-targetdat <- create_truth(fluview = FALSE, weekILI = valid_ILI, year=yrs[1])
-targetdat$Year <- rep(yrs[1], nrow(targetdat))
-for(i in 2:length(yrs)){
-  add <- create_truth(fluview = FALSE, weekILI = valid_ILI, year=yrs[i])
-  add$Year <- rep(yrs[i], nrow(add))
-  targetdat <- rbind(targetdat,add)
-}
-targetdat$target <- factor(targetdat$target)
-targetdat$Year <- factor(targetdat$Year)
-
-onset <- ggplot(data=subset(targetdat, target=="Season onset"), aes(x=location,y=bin_start_incl,color=Year))+geom_point()
-pkper <- ggplot(data=subset(targetdat, target=="Season peak percentage"), aes(x=location,y=bin_start_incl))
-pkwk  <- ggplot(data=subset(targetdat, target=="Season peak week"), aes(x=location,y=bin_start_incl))
-
+# targetdat <- create_truth(fluview = FALSE, weekILI = valid_ILI, year=yrs[1])
+# targetdat$Year <- rep(yrs[1], nrow(targetdat))
+# for(i in 2:length(yrs)){
+#   add <- create_truth(fluview = FALSE, weekILI = valid_ILI, year=yrs[i])
+#   add$Year <- rep(yrs[i], nrow(add))
+#   targetdat <- rbind(targetdat,add)
+# }
+# targetdat$target <- factor(targetdat$target)
+# targetdat$Year <- factor(targetdat$Year)
+# 
+# onset <- ggplot(data=subset(targetdat, target=="Season onset"), aes(x=location,y=bin_start_incl,color=Year))+geom_point()
+# pkper <- ggplot(data=subset(targetdat, target=="Season peak percentage"), aes(x=location,y=bin_start_incl))
+# pkwk  <- ggplot(data=subset(targetdat, target=="Season peak week"), aes(x=location,y=bin_start_incl))
+# 
 
 
 

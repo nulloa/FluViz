@@ -4,6 +4,7 @@ library(httr)
 library(pbapply)
 library(cdcfluview)
 library(MMWRweek)
+library(FluViz)
 source("R/normalize_onset.R") # Load in normalize fn
 source("R/plotgrid.R") # Load in plot fn
 
@@ -16,7 +17,7 @@ dat$location <- factor(dat$location,
                                   "HHS Region 10","US National"))
 
 # Create Plots
-plotgrid(normalize_onset(dat, nalim=.001), week="6_Normalized", ilimx=12)
-plotgrid(dat, week=6, ilimx=12)
+plotgrid(normalize_onset(dat, nalim=.001), ilimx=12)
+plotgrid(dat, ilimx=12)
 
 

@@ -1,7 +1,7 @@
 Package: FluViz
 Title: R Functions for Visualizing a CDC FluView Submission
 Version: 0.0.0.9000
-Authors@R: person("Nehemias"", "Ulloa"", email = "nulloa1@iastate.edu", role = c("aut", "cre"))
+Authors@R: person("Nehemias", "Ulloa", email = "nulloa1@iastate.edu", role = c("aut", "cre"))
 Description: This.
 Depends: R (>= 3.3.2)
 License: What license is it under?

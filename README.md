@@ -1,2 +1,2 @@
 # FluData
-Functions to grab old flu data.
+Functions to visualize submissions.

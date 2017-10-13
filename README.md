@@ -1,2 +1,2 @@
-# FluData
+# FluViz
 Functions to visualize submissions.
